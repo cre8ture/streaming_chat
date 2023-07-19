@@ -108,19 +108,16 @@ function Chatbot() {
     }
   };
 
-  const handleButtonClick = async (e) => {
-    e.preventDefault();
+  const handleButtonClick = async (mes) => {
+    // e.preventDefault();
     setMessageCount(prevCount => prevCount + 1)
 // if messsage count greater than random number bet 5-10 we ask to summarize and then make a plan
-    if(messageCount % 5 == 0 && messageCount !== 0)
-    {
-       console.log("DIVISIBLE")
-    }
-    const input = mes.current.value;
+
+    const input = mes //mes.current.value;
     console.log(input);
     setCurrInput("HUMAN: " + input);
     call_GPT(input);
-    mes.current.value = "";
+    // mes.current.value = "";
   };
 
   return (
@@ -186,7 +183,7 @@ function Chatbot() {
           />
         <button onClick={handleButtonClick}>Send</button> */}
         <br />
-        <ChatInput onSend={handleButtonClick}/>
+        <ChatInput onSend={handleButtonClick} setMessages={setAllMessages} messages={allMessages}/>
         </div>
         <br />
         </div>

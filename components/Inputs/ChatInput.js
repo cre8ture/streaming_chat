@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const ChatInput = ({ onSend }) => {
+const ChatInput = ({ onSend, setMessages, messages }) => {
   const [inputValue, setInputValue] = useState('');
   const [inputExpanded, setInputExpanded] = useState(false);
   const inputRef = useRef(null);
@@ -8,15 +8,17 @@ const ChatInput = ({ onSend }) => {
   const timeoutRef = useRef(null);
 
   useEffect(() => {
+  if(messages.length === 0){
     if (inputExpanded) {
       pRef.current.style.transform = 'translate(10%, 100%)';
     } else {
       pRef.current.style.transform = 'translate(0, 0)';
-    }
+    }}
   }, [inputExpanded]);
 
   const handleReset = () => {
     setInputValue('');
+    setMessages([])
     if (inputRef.current) {
       inputRef.current.value = '';
     }
@@ -28,13 +30,21 @@ const ChatInput = ({ onSend }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      onSend(inputRef.current.value);
       setInputValue('');
     if (inputRef.current) {
       inputRef.current.value = '';
     }
-      onSend(e);
     }
   };
+
+  const handleMouseClick = (e) => {
+    onSend(inputRef.current.value);
+    setInputValue('');
+  if (inputRef.current) {
+    inputRef.current.value = '';
+  }
+  } 
 
   const handleMouseEnter = (e) => {
     clearTimeout(timeoutRef.current);
@@ -53,12 +63,12 @@ const ChatInput = ({ onSend }) => {
       }
     }, 500);
   };
-
+  console.log("messages", messages, messages.length)
   return (
     <div>
-      <p ref={pRef} style={{ transition: 'transform 0.5s' }}>
-        Ask me anything!
-      </p>
+      {messages.length === 0 &&<p ref={pRef} style={{ transition: 'transform 0.5s' }}>
+         Ask me anything!
+      </p>}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {!inputExpanded && (
           <button onClick={handleReset} style={{ marginRight: '8px' }}>
@@ -84,12 +94,12 @@ const ChatInput = ({ onSend }) => {
         />
         {inputValue && (
           <button
-            onClick={onSend}
+            onClick={handleMouseClick}
             style={{
               marginLeft: '0px',
               position: 'relative',
-              left: '-2px',
-              marginBottom: '8px',
+              left: '60px',
+              marginBottom: '12px',
               zIndex: 1,
             }}
           >
