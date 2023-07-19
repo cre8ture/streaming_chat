@@ -1,17 +1,9 @@
 
 // export default Chatbot;
 import { useState, useRef, useEffect } from "react";
-
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyBlock, dracula } from "react-code-blocks";
-
-import Description from "./Descriptions/Description";
-import ChatInput from './Inputs/ChatInput'
-import Footer from './Footer/Footer'
-
-
-
 
 function Chatbot() {
   const [chatMessages, setChatMessages] = useState([]);
@@ -22,17 +14,6 @@ function Chatbot() {
 
 
   const mes = useRef();
-  const messagesEndRef = useRef(null);
-
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [allMessages]);
-
 
   useEffect(() => {
     return () => {
@@ -125,25 +106,15 @@ function Chatbot() {
 
   return (
     <>
-      <div
-      >
+      <div>
         {/* <p>Ask me anything, dudette!</p>
         <input ref={mes} placeholder="ask me anything" />
         <button onClick={handleButtonClick}>Send dudette</button>
         <br /> */}
-        <Description />
       </div>
-
-      <div style={{border: '1px solid lightblue', margin: '3px', padding: '5px'}}>
-
       {allMessages.map((message, index) => (
         <p key={index}>{message}</p>
       ))}
-      <div
-      
-      ref={messagesEndRef}
-      
-      >
       <ReactMarkdown
         children={chatMessages.join("\n")}
         remarkPlugins={[remarkGfm]}
@@ -167,41 +138,12 @@ function Chatbot() {
           },
         }}
       />
-      </div>
-      <div
-    
-      // style={{ display: 'flex', alignItems: 'center' }}
-      >
-      {/* <p>Ask me anything!</p>
-        <input ref={mes}  placeholder="ask me anything" 
-          type="text"
-          style={{
-            width: '300px',
-            transition: 'transform 0.3s',
-  transformOrigin: 'left bottom',
-
-          }}
-          onMouseEnter={(e) => (e.target.style.transform = 'scale(1.2)')}
-          onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
-          />
-        <button onClick={handleButtonClick}>Send</button> */}
+      <p>Ask me anything!</p>
+        <input ref={mes} placeholder="ask me anything" />
+        <button onClick={handleButtonClick}>Send</button>
         <br />
-        <ChatInput onSend={handleButtonClick}/>
-        </div>
-        <br />
-        </div>
-        <Footer />
-
     </>
   );
 }
-
-// type="text"
-// style={{
-//   transition: 'transform 0.3s',
-//   transformOrigin: 'right top',
-// }}
-// onMouseEnter={(e) => (e.target.style.transform = 'scale(2)')}
-// onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
 
 export default Chatbot;
