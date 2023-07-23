@@ -1,77 +1,17 @@
-import React, { useState, useRef } from 'react';
+// import Chatbot from '../components/Chatbot'
+import Chatbot from '../components/Chat_Plan'
 
-const ChatInput = ({ onSend }) => {
-  const [inputValue, setInputValue] = useState('');
-  const [inputExpanded, setInputExpanded] = useState(false);
-  const inputRef = useRef(null);
 
-  const handleReset = () => {
-    setInputValue('');
-    if (inputRef.current) {
-      inputRef.current.value = '';
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-    handleMouseEnter(e)
-  };
-
-  const handleMouseEnter = (e) => {
-    setInputExpanded(true);
-    e.target.style.transform = 'scale(1.2)';
-  };
-
-  const handleMouseLeave = (e) => {
-    if(!inputValue){
-    setInputExpanded(false);
-    e.target.style.transform = 'scale(1)'
-  };
-}
-
+export default function Index() {
   return (
     <div>
-      <p>Ask me anything!</p>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {!inputExpanded && (
-          <button onClick={handleReset} style={{ marginRight: '8px' }}>
-            Reset
-          </button>
-        )}
-        <input
-          ref={inputRef}
-          placeholder="ask me anything"
-          type="text"
-          onChange={handleInputChange}
-          style={{
-            width: '300px',
-            height: '28px',
-            transition: 'transform 0.3s',
-            transformOrigin: 'left bottom',
-            borderRadius: '8px',
-          }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        />
-        {inputValue && (
-          <button
-            onClick={onSend}
-            style={{
-              marginLeft: '0px',
-              position: 'relative',
-              left: '-2px',
-              marginBottom: '8px',
-              zIndex: 1,
-            }}
-          >
-            Send
-          </button>
-        )}
-      </div>
+      ffff
+      <p>
+      To test the CORS route, open the console in a new tab on a different
+      domain and make a POST / GET / OPTIONS request to <b>/api/cors</b>. Using
+      a different method from those mentioned will be blocked by CORS
+    </p>
+    <Chatbot />
     </div>
-  );
-};
-
-
-
-export default ChatInput
+  )
+}

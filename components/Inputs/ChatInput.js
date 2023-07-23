@@ -83,6 +83,7 @@ const ChatInput = ({ onSend, setMessages, messages }) => {
           onKeyDown={handleKeyDown}
           style={{
             padding: '3px',
+            paddingRight: '65px',
             width: '300px',
             height: '28px',
             transition: 'transform 0.3s',

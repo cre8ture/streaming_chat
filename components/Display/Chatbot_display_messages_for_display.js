@@ -6,14 +6,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyBlock, dracula } from "react-code-blocks";
 
-import Description from "./Descriptions/Description";
-import ChatInput from './Inputs/ChatInput'
-import Footer from './Footer/Footer'
-import ButtonGroup from './buttons/ButtonGroup'
+import ChatInput from '../Inputs/ChatInput'
 
 
 
-function Chatbot() {
+function Chatbot( {setMessagesForDisplay}) {
   const [chatMessages, setChatMessages] = useState([]);
   const [allMessages, setAllMessages] = useState([]);
   const [currInput, setCurrInput] = useState("");
@@ -54,9 +51,9 @@ function Chatbot() {
     try {
       var response = ''
       // if(messageCount % 2 == 0 && messageCount !== 0){
-        if(messageCount % 3 == 0 && messageCount !== 0)
+        if(messageCount % 5 === 0 && messageCount !== 0)
         {
-          input = input + ".A lso at the end of your response, as my AI coach, summarize my challenges and plans so far"
+          input = input + ". At the end of your response, as my AI coach, summarize my challenges and plans so far"
           // Between two brackets, like [step1, step2, ... ] offer the top steps for me to take so far to achieve my goals"
         }
       
@@ -68,19 +65,6 @@ function Chatbot() {
           body: JSON.stringify({ input, messageCount }),
         });
 
-        console.log("i am summary response", response)
-
-    // } 
-    // else 
-    // {
-
-    //   response = await fetch("/api/stream_memory_embeds", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ input }),
-    //   });
 
 
 
@@ -91,6 +75,7 @@ function Chatbot() {
         const { done, value } = await reader.read();
         if (done) {
           // setChatMessages((prevMessages) => [...prevMessages.slice(0, -1), curr_message]);
+          setMessagesForDisplay((prevMessages) => [...allMessages, curr_message])
           break;
         }
 
@@ -128,10 +113,10 @@ function Chatbot() {
         <input ref={mes} placeholder="ask me anything" />
         <button onClick={handleButtonClick}>Send dudette</button>
         <br /> */}
-        <Description />
       </div>
 
-      <div style={{border: '1px solid lightblue', margin: '3px', padding: '5px'}}>
+      {/* <div style={{border: '1px solid lightblue', margin: '3px', padding: '5px'}}> */}
+      <div >
 
       {allMessages.map((message, index) => (
         <p key={index}>{message}</p>
@@ -185,14 +170,12 @@ function Chatbot() {
         <div style={{
           width:'100%',
         flex: 'end'}}>
-          <ButtonGroup messages={allMessages} />
         </div>
         <br />
         <ChatInput onSend={handleButtonClick} setMessages={setAllMessages} messages={allMessages}/>
         </div>
         <br />
         </div>
-        <Footer />
 
     </>
   );

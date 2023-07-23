@@ -1,5 +1,5 @@
 // import Chatbot from '../components/Chatbot'
-import Chatbot from '../components/Chatbot4'
+import Chatbot from '../components/Chatbot4_types_code'
 
 
 export default function Index() {
