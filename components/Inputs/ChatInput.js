@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const ChatInput = ({ onSend, setMessages, messages }) => {
+const ChatInput = ({ onSend, setMessages, setChatMessages, messages }) => {
   const [inputValue, setInputValue] = useState('');
   const [inputExpanded, setInputExpanded] = useState(false);
   const inputRef = useRef(null);
@@ -19,6 +19,7 @@ const ChatInput = ({ onSend, setMessages, messages }) => {
   const handleReset = () => {
     setInputValue('');
     setMessages([])
+    setChatMessages([])
     if (inputRef.current) {
       inputRef.current.value = '';
     }
@@ -86,7 +87,7 @@ const ChatInput = ({ onSend, setMessages, messages }) => {
             paddingRight: '65px',
             width: '300px',
             height: '28px',
-            transition: 'transform 0.3s',
+            transition: 'transform 0.5s',
             transformOrigin: 'left bottom',
             borderRadius: '8px',
           }}
@@ -99,7 +100,7 @@ const ChatInput = ({ onSend, setMessages, messages }) => {
             style={{
               marginLeft: '0px',
               position: 'relative',
-              left: '60px',
+              left: '70px',
               marginBottom: '12px',
               zIndex: 1,
             }}

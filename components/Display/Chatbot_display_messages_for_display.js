@@ -10,11 +10,12 @@ import ChatInput from '../Inputs/ChatInput'
 
 
 
-function Chatbot( {setMessagesForDisplay}) {
+function Chatbot( {setMessagesForDisplay, setPlanner}) {
   const [chatMessages, setChatMessages] = useState([]);
   const [allMessages, setAllMessages] = useState([]);
   const [currInput, setCurrInput] = useState("");
   const [messageCount, setMessageCount] = useState(0);
+
 
 
 
@@ -76,6 +77,9 @@ function Chatbot( {setMessagesForDisplay}) {
         if (done) {
           // setChatMessages((prevMessages) => [...prevMessages.slice(0, -1), curr_message]);
           setMessagesForDisplay((prevMessages) => [...allMessages, curr_message])
+          if(messageCount % 5 === 0 % messageCount !== 0){
+            setPlanner(curr_message)
+          }
           break;
         }
 
@@ -172,7 +176,7 @@ function Chatbot( {setMessagesForDisplay}) {
         flex: 'end'}}>
         </div>
         <br />
-        <ChatInput onSend={handleButtonClick} setMessages={setAllMessages} messages={allMessages}/>
+        <ChatInput onSend={handleButtonClick} setChatMessages={setChatMessages} setMessages={setAllMessages} messages={allMessages}/>
         </div>
         <br />
         </div>
