@@ -60,8 +60,8 @@ export default async function handler(
     if (!OPENAI_API_KEY) {
       throw new Error("OPENAI_API_KEY is not defined.");
     }
-    const result = await llm.call("Analyze the text below, if it's a summarization, then turn the summary into a series of TO DO steps for a TO DO list. Only use what's in the summary so as not to add extraneous steps. Output this in a javascript list [`step1', 'step2', ..., 'step3'] " + "Text to analyze: " + req.body.input );
-    console.log("I AM THE RES", result)
+    const result = await llm.call("Analyze the text below, if it's a summarization, then turn the summary into a series of TO DO steps for a TO DO list. Only use what's in the summary so as not to add extraneous steps. If there's nothing to make plans about, just state that you cannot come up with a plan yet but we should keep conversing so we can generate one together. Output this in a javascript list [`step1', 'step2', ..., 'step3'] " + "Text to analyze: " + req.body.input );
+    // console.log("I AM THE RES", result)
     res.status(200).json({ result });
     // return result
   } catch (error) {

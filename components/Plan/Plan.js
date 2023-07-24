@@ -2,35 +2,18 @@
 import { useState, useEffect } from "react";
 import LoadingDots from '../Loading/LoadingDots'
 
-function Chatbot({planner}) {
+function Chatbot({planner, isSum}) {
   const [chatMessages, setChatMessages] = useState([]);
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const inputText =  planner//`This friendship really evokes some strong feelings for you. On the one hand you’re drawn to him. He’s interesting. You’ve never quite known anyone like him, and he’s had experiences that are way outside anything has ever happened to you. You also feel a kind of bond with him. He seems to understand you in uncanny ways. At the same time his perspective sometimes borders on the bizarre, and his insights can creep you out occasionally. He seems needy and lonely, and while that makes your friendship important to him, you also can feel drained by him. You’re drawn toward him and drawn away from him simultaneously. Both things are true, and it leaves you feeling confused about this relationship.`;
+  const inputText =  planner; 
+
+  console.log("PLANNER IN PLANS", planner)
 
   const handleButtonClick = async () => {
     setButtonClicked(true);
     setIsLoading(true);
-    //     try {
-    //         const response = await fetch("/api/plan_maker", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({ input: inputText }),
-    //         });
-            
-    //         const data = await response.json();
-    //         var toDoSteps = data.result.replace(/[\[\]']/g, '').split(', ');
-            
-    //         setChatMessages(toDoSteps);
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         console.error(error);
-    //         setIsLoading(false);
-    //     }
-    // };
     setChatMessages([]);
 
     try {
@@ -60,17 +43,17 @@ function Chatbot({planner}) {
 
   return (
     <>
-<button
+{planner && <button
   onClick={handleButtonClick}
   style={{
-    // borderRadius: '5px',
+    borderRadius: '5px',
     zIndex: -1,
     transition: 'all 1s ease-in-out',
-    opacity: buttonClicked ? 0 : 1
+    // opacity: buttonClicked ? 0 : 1
   }}
 >
   Generate Plan
-</button>
+</button>}
 
       {buttonClicked&&<div
         style={{
@@ -105,12 +88,3 @@ function Chatbot({planner}) {
 
 export default Chatbot;
 
-
-{/* <div */}
-//   style={{
-//     padding: '3px',
-//     border: '1px dotted lightblue',
-//     outline: 'none'
-//   }}
-//   contentEditable={true}
-// >

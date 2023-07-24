@@ -10,11 +10,15 @@ import ChatInput from '../Inputs/ChatInput'
 
 
 
-function Chatbot( {setMessagesForDisplay, setPlanner}) {
+function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
   const [chatMessages, setChatMessages] = useState([]);
   const [allMessages, setAllMessages] = useState([]);
   const [currInput, setCurrInput] = useState("");
+  const [currSummary, setCurrSummary] = useState("");
+
   const [messageCount, setMessageCount] = useState(0);
+  const [isSum, setIsSum1] = useState(false);
+
 
 
 
@@ -38,6 +42,23 @@ function Chatbot( {setMessagesForDisplay, setPlanner}) {
     };
   }, []);
 
+//   useEffect(() => {
+// if(isSum)
+// {
+//   setIsSum2(true)
+
+// }
+//   }, [isSum]);
+
+
+  // useEffect(() => {
+    
+  //   console.log("i am currSummary", currSummary)
+  //     setPlanner(currSummary)
+    
+  //     }, [currSummary]);
+
+
   useEffect(() => {
     setAllMessages((prevAllMessages) => [...prevAllMessages, currInput]);
   }, [currInput]);
@@ -47,15 +68,28 @@ function Chatbot( {setMessagesForDisplay, setPlanner}) {
 
     // setChatMessages((prevMessages) => [...prevMessages, "AI: Generating response..."]);
     setChatMessages(["AI: Generating response..."]);
-    console.log("messageCount", messageCount)
+    // console.log("messageCount", messageCount)
 
     try {
       var response = ''
       // if(messageCount % 2 == 0 && messageCount !== 0){
-        if(messageCount % 5 === 0 && messageCount !== 0)
+
+        if(messageCount === 2 || messageCount === 4 || messageCount === 6)
         {
           input = input + ". At the end of your response, as my AI coach, summarize my challenges and plans so far"
           // Between two brackets, like [step1, step2, ... ] offer the top steps for me to take so far to achieve my goals"
+          console.log("i am summarizing", messageCount)
+          setIsSum1(true)
+        }
+        // else if (messageCount === 3 || messageCount === 5 || messageCount === 7)
+        // {
+        //   console.log("i am planning now")
+        //   setPlanner(allMessages[allMessages.length-1])
+        //   console.log("allMessages[allMessages.length-1]", allMessages[allMessages.length-1])
+        // }
+        else{
+          // setIsSum2(false)
+          setIsSum1(false)
         }
       
         response = await fetch("/api/stream_memory_embeds2", {
@@ -77,8 +111,15 @@ function Chatbot( {setMessagesForDisplay, setPlanner}) {
         if (done) {
           // setChatMessages((prevMessages) => [...prevMessages.slice(0, -1), curr_message]);
           setMessagesForDisplay((prevMessages) => [...allMessages, curr_message])
-          if(messageCount % 5 === 0 % messageCount !== 0){
+          if(messageCount === 2 || messageCount === 4 || messageCount === 6)
+
+          {
+            setCurrSummary(curr_message)
+            // setIsSum2(true)
+            console.log("i am planning", curr_message)
+
             setPlanner(curr_message)
+
           }
           break;
         }
@@ -99,11 +140,13 @@ function Chatbot( {setMessagesForDisplay, setPlanner}) {
 
   const handleButtonClick = async (mes) => {
     // e.preventDefault();
+
+
     setMessageCount(prevCount => prevCount + 1)
 // if messsage count greater than random number bet 5-10 we ask to summarize and then make a plan
-
+    console.log("messageCount", messageCount)
     const input = mes //mes.current.value;
-    console.log(input);
+    // console.log(input);
     setCurrInput("HUMAN: " + input);
     call_GPT(input);
     // mes.current.value = "";
