@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
 import { ChatOpenAI } from "langchain/chat_models";
-import { HumanChatMessage, SystemChatMessage } from "langchain/schema";
 import { CallbackManager } from "langchain/callbacks";
 
 import { OpenAI } from "langchain/llms/openai";
@@ -9,7 +8,13 @@ import { ConversationSummaryMemory } from "langchain/memory";
 import { LLMChain } from "langchain/chains";
 import { PromptTemplate } from "langchain/prompts";
 
-// import { prompt_MI2 } from '../../components/data/prompt'
+import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { VectorStoreRetrieverMemory } from "langchain/memory";
+
+const vectorStore = new MemoryVectorStore(new OpenAIEmbeddings());
+
+
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -34,9 +39,15 @@ Now, imagine you are a veteran AI counselor using MI. Respond to clients with em
 
 const model= new OpenAI({  openAIApiKey: "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", modelName: "gpt-3.5-turbo", temperature: 0.5, streaming: true})
 
-  const memory = new ConversationSummaryMemory({
-    memoryKey: "chat_history",
-    llm: model,
+  // const memory = new ConversationSummaryMemory({
+  //   memoryKey: "chat_history",
+  //   llm: model,
+  // });
+
+  const memory = new VectorStoreRetrieverMemory({
+    // 1 is how many documents to return, you might want to return more, eg. 4
+    vectorStoreRetriever: vectorStore.asRetriever(2),
+    memoryKey: "history",
   });
 
   // const prompt =
@@ -132,7 +143,7 @@ export default async function handler(
     }
 
     // console.log("i am in the head")
-    let s = "";
+    // let s = "";
     // const chatStreaming = new ChatOpenAI({
     //   streaming: true,
     //   callbackManager: CallbackManager.fromHandlers({
@@ -154,6 +165,8 @@ const result = await chain.call({ input: req.body.input }, [
   },
 ]);
 
+await memory.saveContext({ input: req.body.input }, { output: result }); // or should i use res??
+ 
 
     res.end();
   } catch (error) {

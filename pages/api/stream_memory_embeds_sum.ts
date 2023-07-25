@@ -19,6 +19,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const model= new OpenAI({  openAIApiKey: "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", modelName: "gpt-3.5-turbo", temperature: 0.5, streaming: true})
 
 
+
   const memory = new VectorStoreRetrieverMemory({
     // 1 is how many documents to return, you might want to return more, eg. 4
     vectorStoreRetriever: vectorStore.asRetriever(2),

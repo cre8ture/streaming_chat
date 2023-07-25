@@ -17,7 +17,6 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
   const [currSummary, setCurrSummary] = useState("");
 
   const [messageCount, setMessageCount] = useState(0);
-  const [isSum, setIsSum1] = useState(false);
 
 
 
@@ -79,7 +78,6 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
           input = input + ". At the end of your response, as my AI coach, summarize my challenges and plans so far"
           // Between two brackets, like [step1, step2, ... ] offer the top steps for me to take so far to achieve my goals"
           console.log("i am summarizing", messageCount)
-          setIsSum1(true)
         }
         // else if (messageCount === 3 || messageCount === 5 || messageCount === 7)
         // {
@@ -87,10 +85,7 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
         //   setPlanner(allMessages[allMessages.length-1])
         //   console.log("allMessages[allMessages.length-1]", allMessages[allMessages.length-1])
         // }
-        else{
-          // setIsSum2(false)
-          setIsSum1(false)
-        }
+   
       
         response = await fetch("/api/stream_memory_embeds2", {
           method: "POST",
@@ -112,14 +107,12 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
           // setChatMessages((prevMessages) => [...prevMessages.slice(0, -1), curr_message]);
           setMessagesForDisplay((prevMessages) => [...allMessages, curr_message])
           if(messageCount === 2 || messageCount === 4 || messageCount === 6)
-
           {
             setCurrSummary(curr_message)
             // setIsSum2(true)
             console.log("i am planning", curr_message)
 
             setPlanner(curr_message)
-
           }
           break;
         }

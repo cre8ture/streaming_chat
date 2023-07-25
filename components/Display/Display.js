@@ -11,7 +11,7 @@ const TwoColumnLayout = () => {
     const [planner, setPlanner] = useState('')
     const [isSum, setIsSum] = useState(false)
 
-    console.log("planner in display", planner)
+    console.log("messagesForDisplay in messagesForDisplay", messagesForDisplay)
   return (
     <div>
         <Description />
