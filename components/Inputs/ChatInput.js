@@ -135,6 +135,8 @@ function autosize(e) {
             minHeight: '28px', // Set the minimum height to 28px (1 line) when no content
             transition: 'transform 0.5s',
             transformOrigin: 'left bottom',
+            // transformOrigin: 'right top',
+
             borderRadius: '8px',
             resize: 'none', // Prevent manual resizing of the textarea
           }}

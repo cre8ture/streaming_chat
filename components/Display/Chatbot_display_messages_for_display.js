@@ -9,6 +9,8 @@ import { CopyBlock, dracula } from "react-code-blocks";
 import ChatInput from '../Inputs/ChatInput'
 import Audio from '../Audio/Audio'
 
+import Tooltip from "../Tooltips/Tooltip";
+
 import styles from './Chat.module.css'
 
 
@@ -18,6 +20,8 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
   const [allMessages, setAllMessages] = useState([]);
   const [currInput, setCurrInput] = useState("");
   const [currSummary, setCurrSummary] = useState("");
+  const [currMessage, setCurrMessage] = useState("");
+
 
   const [messageCount, setMessageCount] = useState(0);
 
@@ -63,7 +67,6 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
         {
           input = input + ". At the end of your response, as my AI coach, summarize my challenges and plans so far"
           // Between two brackets, like [step1, step2, ... ] offer the top steps for me to take so far to achieve my goals"
-          console.log("i am summarizing", messageCount)
         }
    
       
@@ -84,13 +87,13 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
+          setCurrMessage(curr_message)
           // setChatMessages((prevMessages) => [...prevMessages.slice(0, -1), curr_message]);
           setMessagesForDisplay((prevMessages) => [...allMessages, curr_message])
           if(messageCount === 2 || messageCount === 4 || messageCount === 6)
           {
             setCurrSummary(curr_message)
             // setIsSum2(true)
-            console.log("i am planning", curr_message)
 
             setPlanner(curr_message)
           }
@@ -117,7 +120,6 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
 
     setMessageCount(prevCount => prevCount + 1)
 // if messsage count greater than random number bet 5-10 we ask to summarize and then make a plan
-    console.log("messageCount", messageCount)
     const input = mes //mes.current.value;
     // console.log(input);
     setCurrInput("HUMAN: " + input);
@@ -131,10 +133,6 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
   style={{
   }}
 >
-        {/* <p>Ask me anything, dudette!</p>
-        <input ref={mes} placeholder="ask me anything" />
-        <button onClick={handleButtonClick}>Send dudette</button>
-        <br /> */}
       </div>
 
       {/* <div style={{border: '1px solid lightblue', margin: '3px', padding: '5px'}}> */}
@@ -191,29 +189,28 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
       </div>
       <div
     
-      // style={{ display: 'flex', alignItems: 'center' }}
       >
-      {/* <p>Ask me anything!</p>
-        <input ref={mes}  placeholder="ask me anything" 
-          type="text"
-          style={{
-            width: '300px',
-            transition: 'transform 0.3s',
-  transformOrigin: 'left bottom',
-
-          }}
-          onMouseEnter={(e) => (e.target.style.transform = 'scale(1.2)')}
-          onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
-          />
-        <button onClick={handleButtonClick}>Send</button> */}
+   
         <div style={{
           display: 'flex', alignItems: 'center'}}>
         </div>
         <br />
         <div style={{
           display: 'flex', alignItems: 'center'}}>
-        <ChatInput onSend={handleButtonClick} setChatMessages={setChatMessages} setMessages={setAllMessages} messages={allMessages}/>
-        {chatMessages && <Audio text={"hello I'm puffer!"}/>}
+        {/* <ChatInput onSend={handleButtonClick} setChatMessages={setChatMessages} setMessages={setAllMessages} messages={allMessages}/>
+        {chatMessages && <Audio text={"hello I'm puffer!"}/>} */}
+
+<div style={{ flex: '1' }}>
+          <ChatInput onSend={handleButtonClick} setChatMessages={setChatMessages} setMessages={setAllMessages} messages={allMessages}/>
+          { (
+          <div style={{ marginLeft: '1px',marginTop: '1px' }}>
+           <Tooltip text="Dictate AI Responses"> <Audio text={currMessage}/></Tooltip>
+          </div>
+        )}
+        </div>
+   
+
+
         </div>
         </div>
 
