@@ -3,7 +3,7 @@ import ChatDisplay from './Chatbot_display_messages_for_display'
 import ButtonGroup from '../buttons/ButtonGroup'
 import Description from '../Descriptions/Description';
 import Footer from '../Footer/Footer';
-import Plan from '../Plan/Plan';
+import Plan from '../Plan/Plan2';
 
 
 const TwoColumnLayout = () => {
@@ -13,19 +13,23 @@ const TwoColumnLayout = () => {
 
     console.log("messagesForDisplay in messagesForDisplay", messagesForDisplay)
   return (
-    <div>
+    <div><div
+    style={{ border: '1px solid lavendar',}}>
+
         <Description />
+        </div>
  
     <div style={{ display: 'flex', border: '1px solid lightblue', margin: '3px', padding: '5px' }}>
       <div style={{ flex: 3,padding: '5px'  }}>
         <ChatDisplay setMessagesForDisplay={setMessagesForDisplay} setIsSum2={setIsSum} setPlanner={setPlanner}/>
       </div>
-      <div style={{ flex: 1, padding: '5px' }}>
-        {messagesForDisplay.length > 0 && <ButtonGroup messages={messagesForDisplay} />}
-        
-        {planner.length>3 && <div> <br /> <Plan planner={planner} isSum={isSum} />  </div> }
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '5px' }}>
+    {messagesForDisplay.length > 0 && <ButtonGroup messages={messagesForDisplay} />}
 
-      </div>
+    {planner.length > 3 && <div><br /><Plan planner={planner} isSum={isSum} /></div>}
+</div>
+
+
     </div>
         <Footer />
     </div>

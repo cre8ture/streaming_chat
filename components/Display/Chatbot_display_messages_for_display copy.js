@@ -7,8 +7,6 @@ import remarkGfm from "remark-gfm";
 import { CopyBlock, dracula } from "react-code-blocks";
 
 import ChatInput from '../Inputs/ChatInput'
-import Audio from '../Audio/Audio'
-
 import styles from './Chat.module.css'
 
 
@@ -207,16 +205,12 @@ function Chatbot( {setMessagesForDisplay, setPlanner, setIsSum2}) {
           />
         <button onClick={handleButtonClick}>Send</button> */}
         <div style={{
-          display: 'flex', alignItems: 'center'}}>
+          width:'100%',
+        flex: 'end'}}>
         </div>
         <br />
-        <div style={{
-          display: 'flex', alignItems: 'center'}}>
         <ChatInput onSend={handleButtonClick} setChatMessages={setChatMessages} setMessages={setAllMessages} messages={allMessages}/>
-        {chatMessages && <Audio text={"hello I'm puffer!"}/>}
         </div>
-        </div>
-
         <br />
         </div>
 
