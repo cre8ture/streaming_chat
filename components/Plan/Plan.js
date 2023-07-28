@@ -7,7 +7,7 @@ function Chatbot({planner, isSum}) {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const inputText =  planner; 
+  const inputText = planner; 
 
   console.log("PLANNER IN PLANS", planner)
 

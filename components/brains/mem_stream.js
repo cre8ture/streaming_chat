@@ -36,6 +36,5 @@ const model= new OpenAI({  openAIApiKey: "sk-A3BdUVa6R5CPj26YOUoET3BlbkFJGzQnxwT
     }
   }
   */
- console.log("i am res1 ", res1)
   return res1
 }

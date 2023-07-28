@@ -12,25 +12,6 @@ function Chatbot() {
   const handleButtonClick = async () => {
     setButtonClicked(true);
     setIsLoading(true);
-    //     try {
-    //         const response = await fetch("/api/plan_maker", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({ input: inputText }),
-    //         });
-            
-    //         const data = await response.json();
-    //         var toDoSteps = data.result.replace(/[\[\]']/g, '').split(', ');
-            
-    //         setChatMessages(toDoSteps);
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         console.error(error);
-    //         setIsLoading(false);
-    //     }
-    // };
     setChatMessages([]);
 
     try {

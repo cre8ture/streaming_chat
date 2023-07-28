@@ -1,0 +1,1 @@
+add the Chat_plans into the Plan component 

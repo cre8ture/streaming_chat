@@ -139,7 +139,7 @@ function Chatbot() {
         }}
       />
       <p>Ask me anything!</p>
-        <input ref={mes} placeholder="ask me anything" />
+        <input ref={mes} style={{width: '100px' }}placeholder="ask me anything" />
         <button onClick={handleButtonClick}>Send</button>
         <br />
     </>

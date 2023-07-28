@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "amp.d.ts", "**/*.ts", "**/*.tsx", "pages/api/stream2.js"],
+  "include": ["next-env.d.ts", "amp.d.ts", "**/*.ts", "**/*.tsx", "pages/api/stream2.js", "pages/index.js", "pages/api/stream_memory_momento.js", "pages/api/stream_memory_momento.js"],
   "exclude": ["node_modules"]
 }

@@ -14,7 +14,7 @@ const ChatInput = ({ onSend }) => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    handleMouseEnter(e)
+    // handleMouseEnter(e)
   };
 
   const handleMouseEnter = (e) => {

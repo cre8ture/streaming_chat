@@ -28,6 +28,8 @@ function Chatbot() {
       setChatMessages([]);
     };
   }, []);
+
+  
   const renderMessage = (message, index) => {
     if (message.startsWith("```")) {
       // Triple backticks - Code block

@@ -18,14 +18,12 @@ import { PromptTemplate } from "langchain/prompts";
 import { ConversationChain } from "langchain/chains";
 import { MomentoChatMessageHistory } from "langchain/stores/message/momento";
 
-// //"eyJlbmRwb2ludCI6ImNlbGwtdXMtZWFzdC0xLTEucHJvZC5hLm1vbWVudG9ocS5jb20iLCJhcGlfa2V5IjoiZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpyWVdzeU5UazBRR2N1YUdGeWRtRnlaQzVsWkhVaUxDSjJaWElpT2pFc0luQWlPaUpEUVVFOUluMC5jTWhrTW5waVFsbDBCdVlzNnRybVlqUlZETUllVzAwNm9JMG1TU1EtNXZRIn0=" //MOMENTO_AUTH_TOKEN",
-    // authToken: "eyJlbmRwb2ludCI6ImNlbGwtdXMtZWFzdC0xLTEucHJvZC5hLm1vbWVudG9ocS5jb20iLCJhcGlfa2V5IjoiZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpyWVdzeU5UazBRR2N1YUdGeWRtRnlaQzVsWkhVaUxDSjJaWElpT2pFc0luQWlPaUpEUVVFOUluMC5jTWhrTW5waVFsbDBCdVlzNnRybVlqUlZETUllVzAwNm9JMG1TU1EtNXZRIn0=",
-// import { prompt_MI2 } from '../../components/data/prompt'
-// See https://github.com/momentohq/client-sdk-javascript for connection options
 console.log("MOMENTO_AUTH_TOKEN", process.env.MOMENTO_AUTH_TOKEN);
 console.log("OPENAI_API_KEY", process.env.OPENAI_API_KEY)
 
 const OPENAI_API_KEY_new = process.env.OPENAI_API_KEY
+// Declate the dotenv library
+
 
 const client = new CacheClient({
   configuration: Configurations.Laptop.v1(),
