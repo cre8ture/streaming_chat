@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import Tooltip from '../Tooltips/Tooltip'
 
 const ChatInput = ({ onSend, setMessages, setChatMessages, messages }) => {
   const [inputValue, setInputValue] = useState('');
@@ -114,9 +115,11 @@ function autosize(e) {
       )}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {!inputExpanded && (
+           <Tooltip text="Reset chat">
           <button onClick={handleReset} style={{ marginRight: '8px' }}>
             Reset
           </button>
+         </Tooltip>
         )}
         <textarea
          onInput={autosize}

@@ -16,7 +16,7 @@ const vectorStore = new MemoryVectorStore(new OpenAIEmbeddings());
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-const model= new OpenAI({  openAIApiKey: "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", modelName: "gpt-3.5-turbo", temperature: 0.5, streaming: true})
+const model= new OpenAI({  openAIApiKey:OPENAI_API_KEY, modelName: "gpt-3.5-turbo", temperature: 0.5, streaming: true})
 
 
 
