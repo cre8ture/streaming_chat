@@ -4,7 +4,7 @@ import { LLMChain } from "langchain/chains";
 import { PromptTemplate } from "langchain/prompts";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-const model= new OpenAI({  openAIApiKey: "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", modelName: "gpt-3.5-turbo", temperature: 0})
+const model= new OpenAI({  openAIApiKey: OPENAI_API_KEY, modelName: "gpt-3.5-turbo", temperature: 0})
 
   const memory = new ConversationSummaryMemory({
     memoryKey: "chat_history",
